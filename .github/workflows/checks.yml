@@ -4,6 +4,9 @@ jobs:
   test-lint:
     name: Test and Lint
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: "postgres://devuser:devpass@localhost:5432/devdb"
+      DEBUG: 1
     steps:
       - name: Login to DockerHub
         uses: docker/login-action@v3
