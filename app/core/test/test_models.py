@@ -2,10 +2,16 @@
 Tests for Models
 """
 from django.test import TestCase
+from core import models
 from django.contrib.auth import get_user_model
 
 
-class ModelTests(TestCase):
+def create_user(email="user@example.com", password="testpass123"):
+    """Helper function to create a user."""
+    return get_user_model().objects.create_user(email, password)
+
+
+class UserModelTests(TestCase):
     """
     Test cases for models
     """
@@ -53,3 +59,33 @@ class ModelTests(TestCase):
             "test@example.com", "test123")
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+
+class BookModelTests(TestCase):
+    """Test the book model."""
+
+    def test_create_book_successful(self):
+        user = create_user()
+        book = models.Book.objects.create(
+            owner=user,
+            title='Clean Code',
+            author='Robert C. Martin',
+            description='A Handbook of Agile Software Craftsmanship',
+            condition='Good'
+        )
+
+        self.assertEqual(str(book), book.title)
+        self.assertTrue(book.is_available)
+
+    def test_create_book_with_blank_description(self):
+        user = create_user()
+        book = models.Book.objects.create(
+            owner=user,
+            title='Refactoring',
+            author='Martin Fowler',
+            description='',
+            condition='Fair'
+        )
+
+        self.assertEqual(book.description, '')
+        self.assertTrue(book.is_available)
