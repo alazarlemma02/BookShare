@@ -41,6 +41,12 @@ class BookViewSet(viewsets.ModelViewSet):
             return self.queryset.filter(is_available=True).order_by('-id')
         return self.queryset
 
+    def get_serializer_class(self):
+        """Return appropriate serializer class based on action."""
+        if self.action == 'upload_image':
+            return serializers.BookImageSerializer
+        return self.serializer_class
+
     def perform_create(self, serializer):
         """Attach the authenticated user as the book owner."""
         serializer.save(owner=self.request.user)

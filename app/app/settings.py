@@ -98,7 +98,11 @@ USE_L10N = True
 USE_TZ = True
 
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/static/'
+MEDIA_URL = '/static/media/'
+
+MEDIA_ROOT = '/vol/web/media'
+STATIC_ROOT = '/vol/web/static'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -130,7 +134,6 @@ SIMPLE_JWT = {
 # ✅ CORS Settings (if you're using frontend or Postman)
 CORS_ALLOW_ALL_ORIGINS = True
 
-
-# ✅ Media Files (Optional but recommended)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+SPECTACULAR_SETTINGS = {
+    'COMPONENT_SPLIT_REQUEST': True,
+}
