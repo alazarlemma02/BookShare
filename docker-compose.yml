@@ -20,6 +20,8 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
       - DB_PASS=${DB_PASS}
+      - DATABASE_URL=${DATABASE_URL}
+      - DEBUG=${DEBUG}
     depends_on:
       - db
 

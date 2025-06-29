@@ -1,12 +1,15 @@
+import sys
+import dj_database_url
 import os
 from pathlib import Path
 from datetime import timedelta
+from distutils.util import strtobool
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 SECRET_KEY = 'django-insecure-r_*1@2hy#5=1jz$3!#!+b^3e8a6y5y+c$u=^^98f5aej@now6v'
-DEBUG = True
+DEBUG = strtobool(os.environ.get('DEBUG', '0'))
 ALLOWED_HOSTS = ['*']
 
 
@@ -65,14 +68,19 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': os.environ.get('DB_HOST'),
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASS'),
-    }
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
+
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'HOST': os.environ.get('DB_HOST'),
+            'NAME': os.environ.get('DB_NAME'),
+            'USER': os.environ.get('DB_USER'),
+            'PASSWORD': os.environ.get('DB_PASS'),
+        }
+    }
 
 
 AUTH_PASSWORD_VALIDATORS = [
