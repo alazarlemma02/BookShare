@@ -1,4 +1,17 @@
 Django>=3.2.4,<3.3
 djangorestframework>=3.12.4,<3.13
 psycopg2>=2.8.6,<2.9.9
-drf-spectacular>=0.15.1,<0.16
+# Documentation
+drf-spectacular>=0.15.1,<0.27.2
+
+# Image processing
+Pillow>=10.1.0,<10.4.0
+
+# Request Processing
+requests>=2.25.1,<2.32.2
+
+# Cors headers
+django-cors-headers>=4.0.0,<4.4.0
+
+# JWT
+djangorestframework-simplejwt>=5.0.0,<5.3.1
