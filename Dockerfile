@@ -32,3 +32,6 @@ RUN python -m venv /py && \
 ENV PATH="/py/bin:$PATH"
 
 USER django-user
+
+# ✅ Production CMD
+CMD ["gunicorn", "app.wsgi:application", "--bind", "0.0.0.0:8000"]
