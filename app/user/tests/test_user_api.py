@@ -148,6 +148,7 @@ class PrivateUserApiTests(TestCase):
             'email': self.user.email,
             'first_name': self.user.first_name,
             'last_name': self.user.last_name,
+            'profile_picture': None,
         })
 
     def test_post_me_not_allowed(self):
