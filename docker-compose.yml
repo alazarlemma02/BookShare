@@ -22,6 +22,7 @@ services:
       - DB_PASS=devpass
       - DATABASE_URL=${DATABASE_URL}
       - DEBUG=1
+      - USE_S3=False
     depends_on:
       - db
 
