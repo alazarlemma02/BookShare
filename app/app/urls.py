@@ -33,6 +33,7 @@ urlpatterns = [
     # App Endpoints
     path('api/user/', include('user.urls')),
     path('api/book/', include('book.urls')),
+    path('api/rental/', include('rental.urls'))
 ]
 
 if settings.DEBUG:

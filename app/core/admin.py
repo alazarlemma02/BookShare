@@ -6,7 +6,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
-from core.models import User, Book
+from core.models import User, Book, Rental
 from app import settings
 
 
@@ -68,3 +68,11 @@ class BookAdmin(admin.ModelAdmin):
     list_display = ['title', 'author', 'owner', 'is_available']
     list_filter = ['is_available', 'condition']
     search_fields = ['title', 'author']
+
+
+@admin.register(Rental)
+class RentalAdmin(admin.ModelAdmin):
+    """Admin settings for Rental."""
+    list_display = ['renter', 'book', 'status', 'request_date']
+    list_filter = ['status']
+    search_fields = ['renter__email', 'book__title']
