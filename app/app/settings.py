@@ -114,9 +114,9 @@ if USE_S3:
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
     # Media files (User uploads)
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    DEFAULT_FILE_STORAGE = 'core.storage_backends.SupabasePublicMediaStorage'
 
-    AWS_S3_ENDPOINT_URL = 'https://bxxmumrercimzphmsriw.supabase.co/storage/v1/s3'
+    AWS_S3_ENDPOINT_URL = 'https://bxxmumrercimzphmsriw.supabase.co'
     AWS_ACCESS_KEY_ID = os.environ.get('SUPABASE_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('SUPABASE_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.environ.get('SUPABASE_BUCKET_NAME')
@@ -125,7 +125,7 @@ if USE_S3:
     AWS_S3_ADDRESSING_STYLE = "path"
 
     STATIC_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/static/"
-    MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/media/"
+    MEDIA_URL = f"https://{AWS_S3_ENDPOINT_URL.split('//')[-1]}/storage/v1/object/public/{AWS_STORAGE_BUCKET_NAME}/"
 else:
     STATIC_URL = '/static/static/'
     MEDIA_URL = '/static/media/'
