@@ -23,6 +23,15 @@ class UserSerializer(serializers.ModelSerializer):
             'profile_picture': {'required': False},
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Check if it's update, make fields optional
+        if self.instance:
+            self.fields['email'].required = False
+            self.fields['first_name'].required = False
+            self.fields['last_name'].required = False
+            self.fields['password'].required = False
+
     def create(self, validated_data):
         """Create a new user with encrypted password and return it"""
         return get_user_model().objects.create_user(**validated_data)
