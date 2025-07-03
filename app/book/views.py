@@ -38,7 +38,7 @@ class BookViewSet(viewsets.ModelViewSet):
             return self.queryset.filter(
                 owner=self.request.user).order_by('-id')
         if self.action == 'list':
-            return self.queryset.filter(is_available=True).order_by('-id')
+            return self.queryset.order_by('-id')
         return self.queryset
 
     def get_serializer_class(self):
