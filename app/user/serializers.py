@@ -59,3 +59,9 @@ class CustomAuthTokenSerializer(TokenObtainPairSerializer):
         data['first_name'] = self.user.first_name
         data['last_name'] = self.user.last_name
         return data
+
+
+class UserPublicSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ['id', 'email', 'first_name', 'last_name']
